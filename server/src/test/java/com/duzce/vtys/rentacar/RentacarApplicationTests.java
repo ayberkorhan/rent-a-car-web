@@ -1,10 +1,10 @@
-package com.duzce.mf.vtys.rent.a.car;
+package com.duzce.vtys.rentacar;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class RentacarApplicationTests {
 
 	@Test
 	void contextLoads() {

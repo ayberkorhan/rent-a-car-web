@@ -8,11 +8,11 @@
 		<version>2.6.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.duzce.mf.vtys</groupId>
-	<artifactId>rent.a.car</artifactId>
+	<groupId>com.duzce.vtys</groupId>
+	<artifactId>rentacar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rent.a.car</name>
-	<description>Rent A Car Project</description>
+	<name>rentacar</name>
+	<description>RENT A CAR API</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -28,6 +28,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
 		</dependency>
 
 		<dependency>

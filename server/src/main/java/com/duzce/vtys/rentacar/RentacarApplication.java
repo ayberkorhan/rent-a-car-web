@@ -1,13 +1,13 @@
-package com.duzce.mf.vtys.rent.a.car;
+package com.duzce.vtys.rentacar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class RentacarApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(RentacarApplication.class, args);
 	}
 
 }
