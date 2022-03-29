@@ -15,14 +15,4 @@ public class CarInfo {
     private String carYear;
     private String carKilometer;
 
-    @ManyToOne
-    @JoinColumn(name="")
-    private Car car;
-
-
-
-
-
-
-
 }
