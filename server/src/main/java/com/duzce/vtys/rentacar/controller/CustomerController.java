@@ -3,7 +3,6 @@ package com.duzce.vtys.rentacar.controller;
 import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.service.CustomerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +16,16 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService){
-        this.customerService=customerService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomer() throws  Exception{
+    @GetMapping("/")
+    public ResponseEntity<List<Customer>> getAllCustomer() throws Exception {
         return ResponseEntity.ok(customerService.getAllCustomer());
+    }
+    @GetMapping("/hello")
+    public String helloWorld (){
+        return "Hello from API";
     }
 }

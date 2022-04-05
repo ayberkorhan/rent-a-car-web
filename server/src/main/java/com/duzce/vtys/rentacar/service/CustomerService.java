@@ -12,13 +12,12 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository){
-        this.customerRepository=customerRepository;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getAllCustomer(){
+    public List<Customer> getAllCustomer() {
         return customerRepository.findAll();
     }
-
 
 }

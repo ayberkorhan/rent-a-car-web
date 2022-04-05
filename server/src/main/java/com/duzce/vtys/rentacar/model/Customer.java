@@ -7,11 +7,12 @@ import java.util.List;
 
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "customer_id")
     private Long customerID;
 
     @Column(name = "first_name")
@@ -28,15 +29,6 @@ public class Customer implements Serializable {
 
     @Column(name = "created_date")
     private Date cratedDate;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "adressID", nullable = false)
-    private CustomerAdress customerAdress;
-
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="loginID")
-    private CustomerLogin customerLogin;
 
 
 }
