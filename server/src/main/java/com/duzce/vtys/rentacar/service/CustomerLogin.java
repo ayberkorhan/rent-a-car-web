@@ -8,15 +8,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CustomerService {
+public class CustomerLogin {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerLogin(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     public List<Customer> getAllCustomer() {
+        customerRepository.findAll().stream().forEach(u-> System.out.println(u.getIdentityNumber()));
         return customerRepository.findAll();
     }
 

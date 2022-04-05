@@ -1,7 +1,7 @@
 package com.duzce.vtys.rentacar.controller;
 
 import com.duzce.vtys.rentacar.model.Customer;
-import com.duzce.vtys.rentacar.service.CustomerService;
+import com.duzce.vtys.rentacar.service.CustomerLogin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("api/v1/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerLogin customerService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerLogin customerService) {
         this.customerService = customerService;
     }
 
