@@ -33,9 +33,15 @@ public class Customer implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date cratedDate;
 
+
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "login_id")
+    @JoinColumn(name = "login_id",unique = true)
     private CustomerLogin customerLogin;
+
+    public Long getCustomerLoginId() {
+        return customerLogin.getLoginId();
+    }
 
     public Long getCustomerID() {
         return customerId;

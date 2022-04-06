@@ -10,12 +10,12 @@ public class CustomerLoginDtoConverter {
 
     // Tekil DTO CONVERTER
     public CustomerLoginDto convert(CustomerLogin customerLogin){
-        return new CustomerLoginDto(customerLogin.getEmail(), customerLogin.getPassword(), customerLogin.getCreatedDate());
+        return new CustomerLoginDto(customerLogin.getLoginId(), customerLogin.getEmail(), customerLogin.getPassword(), customerLogin.getCreatedDate());
     }
 
     // List DTO CONVERTER
     public List<CustomerLoginDto> convert(List<CustomerLogin> customerLogin){
-        return customerLogin.stream().map(customer -> new CustomerLoginDto(customer.getEmail(),customer.getPassword(),customer.getCreatedDate())).collect(Collectors.toList());
+        return customerLogin.stream().map(customer -> new CustomerLoginDto(customer.getLoginId(), customer.getEmail(),customer.getPassword(),customer.getCreatedDate())).collect(Collectors.toList());
     }
 }
 
