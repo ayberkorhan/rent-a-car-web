@@ -23,6 +23,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/customer")
 public class CustomerController {
 
@@ -36,7 +37,7 @@ public class CustomerController {
 
     @GetMapping()
     public ResponseEntity<List<CustomerDto>> getAllCustomer() throws Exception {
-        return ResponseEntity.ok(customerService.getAllCustomer());
+        return Respon   seEntity.ok(customerService.getAllCustomer());
     }
 
     @GetMapping("/{id}")
