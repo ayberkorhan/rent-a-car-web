@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 public class CustomerDtoConverter {
 
     public List<CustomerDto> convert(List<Customer> customers){
-        return customers.stream().map(c -> new CustomerDto(c.getCustomerID(),c.getCustomerLoginId(),c.getFirstName(),c.getLastName(),c.getIdentityNumber(),c.getBirthday(),c.getCratedDate())).collect(Collectors.toList());
+        return customers.stream().map(c -> new CustomerDto(c.getCustomerId(),c.getCustomerLoginId(),c.getFirstName(),c.getLastName(),c.getIdentityNumber())).collect(Collectors.toList());
+    }
+
+    public CustomerDto convert(Customer customer){
+        return new CustomerDto(customer.getCustomerId(),customer.getCustomerLoginId(),customer.getFirstName(),customer.getLastName(),customer.getIdentityNumber());
     }
 }

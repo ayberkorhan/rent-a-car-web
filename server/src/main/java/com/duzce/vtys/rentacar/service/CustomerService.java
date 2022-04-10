@@ -3,6 +3,7 @@ package com.duzce.vtys.rentacar.service;
 
 import com.duzce.vtys.rentacar.dto.CustomerDto;
 import com.duzce.vtys.rentacar.dto.CustomerDtoConverter;
+import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,15 @@ public class CustomerService {
     }
 
     public List<CustomerDto> getAllCustomer() {
-        customerRepository.findAll().stream().forEach(u -> System.out.println("Login ID:" + u.getCustomerLoginId()));
         return new CustomerDtoConverter().convert(customerRepository.findAll());
+    }
+    public CustomerDto getCustomerById(Long id){
+        return new CustomerDtoConverter().convert(customerRepository.findById(id).orElseThrow(NullPointerException::new));
+    }
+
+    public Customer save (Customer customer) {
+        customerRepository.save(customer);
+        return customer;
     }
 
 }

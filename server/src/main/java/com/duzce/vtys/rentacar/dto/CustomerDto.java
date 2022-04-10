@@ -14,7 +14,7 @@ public class CustomerDto {
     private Date birthday;
     private Date createdDate;
 
-    public CustomerDto() {}
+    public CustomerDto(Long customerId, Long customerLoginId, String firstName, String lastName, Long identityNumber) {}
 
     public CustomerDto(Long customerId, Long loginId, String firstName, String lastName, Long identityNumber, Date birthday, Date createdDate) {
         this.customerId = customerId;

@@ -1,11 +1,9 @@
 package com.duzce.vtys.rentacar.model;
 
-import net.bytebuddy.implementation.bind.annotation.Default;
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -14,7 +12,6 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
     private Long customerId;
 
     @Column(name = "first_name")
@@ -23,31 +20,26 @@ public class Customer implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "identity_number")
+    @Column(name = "identity_number",unique = true)
     private Long identityNumber;
 
-    @Column(name = "birthday")
-    private Date birthday;
-
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date cratedDate;
-
+    @OneToMany(mappedBy = "adressId")
+    private List<CustomerAdress> customerAdress;
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "login_id",unique = true)
+    @JoinColumn(name = "login_id", unique = true)
     private CustomerLogin customerLogin;
 
     public Long getCustomerLoginId() {
         return customerLogin.getLoginId();
     }
 
-    public Long getCustomerID() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerID(Long customerID) {
+    public void setCustomerId(Long customerID) {
         this.customerId = customerID;
     }
 
@@ -75,21 +67,6 @@ public class Customer implements Serializable {
         this.identityNumber = identityNumber;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Date getCratedDate() {
-        return cratedDate;
-    }
-
-    public void setCratedDate(Date cratedDate) {
-        this.cratedDate = cratedDate;
-    }
 
 
 }
