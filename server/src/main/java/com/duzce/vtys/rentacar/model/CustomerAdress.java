@@ -9,7 +9,7 @@ import java.util.Date;
 @Table(name = "customer_adress")
 public class CustomerAdress implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long adressId;
 
     @ManyToOne

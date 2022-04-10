@@ -8,8 +8,9 @@ import axios from "axios";
 
 function App() {
 
+  const login = {"email":"enes","login_password":"123"};
   const getCustomer = () => {
-    axios.get("http://localhost:8080/api/v1/customer").then((res)=> console.log(res));
+    axios.post("http://localhost:8080/api/v1/customerlogin",{login}).then((res)=> console.log(res));
   }
   return (
     <div className="App" onClick={getCustomer}>

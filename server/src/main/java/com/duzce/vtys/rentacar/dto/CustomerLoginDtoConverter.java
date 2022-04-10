@@ -9,13 +9,22 @@ public class CustomerLoginDtoConverter {
 
 
     // Customer DTO CONVERTER
-    public CustomerLoginDto convert(CustomerLogin customerLogin){
-        return new CustomerLoginDto(customerLogin.getLoginId(), customerLogin.getEmail(), customerLogin.getPassword(), customerLogin.getCreatedDate());
+    public CustomerLoginDto convert(CustomerLogin customerLogin) {
+        return new CustomerLoginDto(
+                customerLogin.getLoginId(),
+                customerLogin.getEmail(),
+                customerLogin.getPassword());
     }
 
     // Customer List DTO CONVERTER
-    public List<CustomerLoginDto> convert(List<CustomerLogin> customerLogin){
-        return customerLogin.stream().map(customer -> new CustomerLoginDto(customer.getLoginId(), customer.getEmail(),customer.getPassword(),customer.getCreatedDate())).collect(Collectors.toList());
+    public List<CustomerLoginDto> convert(List<CustomerLogin> customerLogin) {
+        return customerLogin.stream()
+                .map(customer -> new CustomerLoginDto(
+                        customer.getLoginId(),
+                        customer.getEmail(),
+                        customer.getPassword()
+                        ))
+                .collect(Collectors.toList());
     }
 }
 

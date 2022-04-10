@@ -1,5 +1,8 @@
 package com.duzce.vtys.rentacar.model;
 
+import org.hibernate.annotations.GenerationTime;
+
+import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,7 +11,7 @@ import java.util.Date;
 public class CustomerLogin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "login_id")
     private Long loginId;
 
@@ -17,9 +20,6 @@ public class CustomerLogin {
 
     @Column(name = "login_password")
     private String password;
-
-    @Temporal(TemporalType.TIMESTAMP) // default date değeri
-    private Date createdDate;
 
     @OneToOne(mappedBy = "customerLogin")
     private Customer customer;
@@ -38,9 +38,6 @@ public class CustomerLogin {
         return password;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
 
     public Customer getCustomer() {
         return customer;
@@ -53,4 +50,6 @@ public class CustomerLogin {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setLoginId(Long loginId) {this.loginId = loginId;}
 }

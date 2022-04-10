@@ -1,11 +1,10 @@
 package com.duzce.vtys.rentacar.controller;
 
 import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
+import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.service.CustomerLoginService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +21,10 @@ public class CustomerLoginController {
     @GetMapping
     public ResponseEntity<List<CustomerLoginDto>> getAllCustomerLogin (){
         return ResponseEntity.ok(customerLoginService.getAllCustomerLogin());
+    }
+
+    @PostMapping()
+    public ResponseEntity<CustomerLoginDto> postCustomerLogin(@RequestBody CustomerLogin customerLogin){
+        return ResponseEntity.ok(customerLoginService.save(customerLogin));
     }
 }
