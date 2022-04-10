@@ -4,9 +4,10 @@ package com.duzce.vtys.rentacar.service;
 import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
 import com.duzce.vtys.rentacar.dto.CustomerLoginDtoConverter;
 import com.duzce.vtys.rentacar.exception.CustomerLoginNotFoundException;
-import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.repository.CustomerLoginRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +19,13 @@ public class CustomerLoginService {
     private final CustomerLoginRepository customerLoginRepository;
 
     private final CustomerService customerService;
+    private final CustomerLoginDtoConverter customerLoginDtoConverter;
 
-    private final CustomerAdressService customerAdressService;
-
-    public CustomerLoginService(CustomerLoginRepository customerLoginRepository, CustomerService customerService, CustomerAdressService customerAdressService) {
+    @Autowired //Circular Dependencies in Spring
+    public CustomerLoginService(CustomerLoginRepository customerLoginRepository, @Lazy CustomerService customerService, CustomerLoginDtoConverter customerLoginDtoConverter) {
         this.customerLoginRepository = customerLoginRepository;
         this.customerService = customerService;
-        this.customerAdressService = customerAdressService;
+        this.customerLoginDtoConverter = customerLoginDtoConverter;
     }
 
     // Get All Customer Login
@@ -40,13 +41,22 @@ public class CustomerLoginService {
                 .convert(customerLoginRepository.save(customerLogin));
     }
 
-    public CustomerLogin getCustomerLoginById(Long id) throws CustomerLoginNotFoundException{
+    public CustomerLoginDto getCustomerLoginById(Long id){
+        return customerLoginDtoConverter.convert(
+                customerLoginRepository.findById(id)
+                        .orElseThrow(() -> new CustomerLoginNotFoundException("Customer could not find by id :" +id.toString()))
+        );
+    }
+
+    public CustomerLogin findCustomerLoginById(Long id){
         return customerLoginRepository.findById(id)
-                .orElseThrow(() -> new CustomerLoginNotFoundException(id.toString()+" Numaralı Kullanıcı Bulunamadı"));
+                .orElseThrow(
+                        ()-> new CustomerLoginNotFoundException("Customer could not find by id :" +id.toString())
+                );
     }
 
     public CustomerLogin deleteCustomerById(Long id) throws CustomerLoginNotFoundException  {
-        CustomerLogin customerLogin = getCustomerLoginById(id);
+        CustomerLogin customerLogin = findCustomerLoginById(id);
         customerLoginRepository.deleteById(id);
         return customerLogin;
 

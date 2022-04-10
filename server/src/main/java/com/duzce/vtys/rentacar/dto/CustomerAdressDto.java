@@ -11,10 +11,13 @@ public class CustomerAdressDto implements Serializable {
     private final String buildingInfo;
     private final String doorNumber;
     private final String zipCode;
+    private final Long customerId;
+    private final Long adressId;
+
 
 
     public CustomerAdressDto(String country, String city, String town, String street, String buildingInfo,
-                             String doorNumber, String zipCode) {
+                             String doorNumber, String zipCode, Long customerId, Long adressId) {
         this.country = country;
         this.city = city;
         this.town = town;
@@ -22,6 +25,15 @@ public class CustomerAdressDto implements Serializable {
         this.buildingInfo = buildingInfo;
         this.doorNumber = doorNumber;
         this.zipCode = zipCode;
+        this.customerId = customerId;
+        this.adressId = adressId;
+    }
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public Long getAdressId() {
+        return adressId;
     }
 
     public String getCountry() {

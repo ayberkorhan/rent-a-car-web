@@ -29,10 +29,6 @@ public class CustomerAdress implements Serializable {
         return customer;
     }
 
-    public Long getCustomerId() {
-        return customer.getCustomerId();
-    }
-
     public Long getAdressId() {
         return adressId;
     }
@@ -45,9 +41,7 @@ public class CustomerAdress implements Serializable {
         return city;
     }
 
-    public String getTown() {
-        return town;
-    }
+    public String getTown() {return town;}
 
     public String getStreet() {
         return street;

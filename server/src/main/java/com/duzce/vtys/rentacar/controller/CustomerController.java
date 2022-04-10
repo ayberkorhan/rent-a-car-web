@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/customer")
@@ -35,8 +34,9 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(customerService.getCustomerById(id));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<CustomerDto> deleteCustomerById(@PathVariable Long id) throws Exception{
+    public ResponseEntity<CustomerDto> deleteCustomerById(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(customerService.deleteCustomerById(id));
     }
 

@@ -2,10 +2,8 @@ package com.duzce.vtys.rentacar.controller;
 
 import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
 import com.duzce.vtys.rentacar.dto.CustomerLoginDtoConverter;
-import com.duzce.vtys.rentacar.exception.CustomerLoginNotFoundException;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.service.CustomerLoginService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,26 +16,28 @@ public class CustomerLoginController {
     private final CustomerLoginService customerLoginService;
 
 
-    public CustomerLoginController(CustomerLoginService customerLoginService) {
+
+    public CustomerLoginController(CustomerLoginService customerLoginService ) {
         this.customerLoginService = customerLoginService;
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerLoginDto>> getAllCustomerLogin (){
+    public ResponseEntity<List<CustomerLoginDto>> getAllCustomerLogin() {
         return ResponseEntity.ok(customerLoginService.getAllCustomerLogin());
     }
 
     @PostMapping()
-    public ResponseEntity<CustomerLoginDto> postCustomerLogin(@RequestBody CustomerLogin customerLogin){
+    public ResponseEntity<CustomerLoginDto> postCustomerLogin(@RequestBody CustomerLogin customerLogin) {
         return ResponseEntity.ok(customerLoginService.save(customerLogin));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomerLogin> deleteCustomerLogin(@PathVariable Long id) throws Exception {
-       return ResponseEntity.ok(customerLoginService.deleteCustomerById(id));
+        return ResponseEntity.ok(customerLoginService.deleteCustomerById(id));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerLoginDto> getAllCustomerLogin (@PathVariable Long id){
-        return ResponseEntity.ok(new CustomerLoginDtoConverter().convert(customerLoginService.getCustomerLoginById(id)));
+    public ResponseEntity<CustomerLoginDto> getAllCustomerLogin(@PathVariable Long id) {
+        return ResponseEntity.ok(customerLoginService.getCustomerLoginById(id));
     }
 }

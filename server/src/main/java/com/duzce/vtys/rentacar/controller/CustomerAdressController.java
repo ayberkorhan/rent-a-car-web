@@ -1,11 +1,11 @@
 package com.duzce.vtys.rentacar.controller;
 
+import com.duzce.vtys.rentacar.dto.CustomerAdressDto;
 import com.duzce.vtys.rentacar.model.CustomerAdress;
 import com.duzce.vtys.rentacar.service.CustomerAdressService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -19,11 +19,30 @@ public class CustomerAdressController {
         this.customerAdressService = customerAdressService;
     }
 
-
+    @GetMapping("/customer/{id}") // customerID
+    public ResponseEntity<List<CustomerAdressDto>> getCustomerAdressByCustomerId(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok(customerAdressService.getCustomerAdressByCustomerId(id));
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<CustomerAdress>> getCustomerAdressByCustomerId() throws Exception {
-        return ResponseEntity.ok(customerAdressService.getCustomerAdressByCustomerId(3L));
+    public ResponseEntity<CustomerAdressDto> getCustomerAdressByAdressId(@PathVariable Long id) {
+        return ResponseEntity.ok(customerAdressService.getCustomerAdressByAdressId(id));
     }
+
+    @GetMapping()
+    public ResponseEntity<List<CustomerAdressDto>> getAllCustomerAdress() {
+        return ResponseEntity.ok(customerAdressService.getAllCustomerAdress());
+    }
+
+    @PostMapping()
+    public ResponseEntity<CustomerAdressDto> postCustomerAdress(@RequestBody CustomerAdress customerAdress) throws Exception {
+        return ResponseEntity.ok(customerAdressService.postCustomerAdress(customerAdress));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomerAdressDto> deleteCustomerAdressByAdressId(@PathVariable Long id){
+        return ResponseEntity.ok(customerAdressService.deleteCustomerAdressByAdressId(id));
+    }
+
 
 }
