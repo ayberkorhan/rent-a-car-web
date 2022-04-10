@@ -1,2 +1,4 @@
-package com.duzce.vtys.rentacar.Configuration;public class HTTPConfiguration {
+package com.duzce.vtys.rentacar.Configuration;
+
+public class HTTPConfiguration {
 }

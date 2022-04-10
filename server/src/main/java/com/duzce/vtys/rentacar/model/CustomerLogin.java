@@ -1,10 +1,7 @@
 package com.duzce.vtys.rentacar.model;
 
-import org.hibernate.annotations.GenerationTime;
-
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "customer_login")

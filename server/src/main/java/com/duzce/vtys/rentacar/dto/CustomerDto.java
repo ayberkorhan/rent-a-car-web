@@ -11,19 +11,14 @@ public class CustomerDto {
     private String firstName;
     private String lastName;
     private Long identityNumber;
-    private Date birthday;
-    private Date createdDate;
 
-    public CustomerDto(Long customerId, Long customerLoginId, String firstName, String lastName, Long identityNumber) {}
 
-    public CustomerDto(Long customerId, Long loginId, String firstName, String lastName, Long identityNumber, Date birthday, Date createdDate) {
+    public CustomerDto(Long customerId, String firstName, String lastName, Long identityNumber,Long loginId) {
         this.customerId = customerId;
         this.loginId = loginId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.identityNumber = identityNumber;
-        this.birthday = birthday;
-        this.createdDate = createdDate;
     }
 
     public Long getCustomerId() {
@@ -46,25 +41,18 @@ public class CustomerDto {
         return identityNumber;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerDto that = (CustomerDto) o;
-        return Objects.equals(customerId, that.customerId) && Objects.equals(loginId, that.loginId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(identityNumber, that.identityNumber) && Objects.equals(birthday, that.birthday) && Objects.equals(createdDate, that.createdDate);
+        return Objects.equals(customerId, that.customerId) && Objects.equals(loginId, that.loginId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(identityNumber, that.identityNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, loginId, firstName, lastName, identityNumber, birthday, createdDate);
+        return Objects.hash(customerId, loginId, firstName, lastName, identityNumber);
     }
 
     @Override
@@ -75,8 +63,6 @@ public class CustomerDto {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", identityNumber=" + identityNumber +
-                ", birthday=" + birthday +
-                ", createdDate=" + createdDate +
                 '}';
     }
 }

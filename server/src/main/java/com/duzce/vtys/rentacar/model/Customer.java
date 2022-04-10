@@ -31,8 +31,12 @@ public class Customer implements Serializable {
     @JoinColumn(name = "login_id", unique = true)
     private CustomerLogin customerLogin;
 
-    public Long getCustomerLoginId() {
-        return customerLogin.getLoginId();
+    public CustomerLogin getCustomerLogin() {
+        return customerLogin;
+    }
+
+    public void setCustomerLogin(CustomerLogin customerLogin) {
+        this.customerLogin = customerLogin;
     }
 
     public Long getCustomerId() {

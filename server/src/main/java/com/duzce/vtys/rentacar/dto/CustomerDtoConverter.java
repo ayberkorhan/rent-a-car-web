@@ -12,18 +12,18 @@ public class CustomerDtoConverter {
         return customers.stream()
                 .map(c -> new CustomerDto(
                         c.getCustomerId(),
-                        c.getCustomerLoginId(),
                         c.getFirstName(),
                         c.getLastName(),
-                        c.getIdentityNumber()))
+                        c.getIdentityNumber(),
+                        c.getCustomerLogin().getLoginId()))
                 .collect(Collectors.toList());
     }
 
     public CustomerDto convert(Customer customer) {
         return new CustomerDto(customer.getCustomerId(),
-                customer.getCustomerLoginId(),
                 customer.getFirstName(),
                 customer.getLastName(),
-                customer.getIdentityNumber());
+                customer.getIdentityNumber(),
+                customer.getCustomerLogin().getLoginId());
     }
 }

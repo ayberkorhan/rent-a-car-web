@@ -10,7 +10,7 @@ function App() {
 
   const login = {"email":"enes","login_password":"123"};
   const getCustomer = () => {
-    axios.post("http://localhost:8080/api/v1/customerlogin",{login}).then((res)=> console.log(res));
+    axios.get("http://localhost:8080/api/v1/customerlogin/55",{login}).then((res)=> console.log(res.status));
   }
   return (
     <div className="App" onClick={getCustomer}>
