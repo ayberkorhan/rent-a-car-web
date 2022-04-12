@@ -18,13 +18,13 @@ public class CustomerLoginService {
     private final CustomerLoginDtoConverter customerLoginDtoConverter;
 
 
-    public CustomerLoginService(CustomerLoginRepository customerLoginRepository,CustomerLoginDtoConverter customerLoginDtoConverter) {
+    public CustomerLoginService(CustomerLoginRepository customerLoginRepository, CustomerLoginDtoConverter customerLoginDtoConverter) {
         this.customerLoginRepository = customerLoginRepository;
         this.customerLoginDtoConverter = customerLoginDtoConverter;
     }
 
     // Get All Customer Login
-    public List<CustomerLoginDto> getAllCustomerLogin(){
+    public List<CustomerLoginDto> getAllCustomerLogin() {
         return new CustomerLoginDtoConverter()
                 .convert(customerLoginRepository.findAll());
     }
@@ -36,21 +36,21 @@ public class CustomerLoginService {
                 .convert(customerLoginRepository.save(customerLogin));
     }
 
-    public CustomerLoginDto getCustomerLoginById(Long id){
+    public CustomerLoginDto getCustomerLoginById(Long id) {
         return customerLoginDtoConverter.convert(
                 customerLoginRepository.findById(id)
-                        .orElseThrow(() -> new CustomerLoginNotFoundException("Customer could not find by id :" +id.toString()))
+                        .orElseThrow(() -> new CustomerLoginNotFoundException("Customer could not find by id :" + id.toString()))
         );
     }
 
-    public CustomerLogin findCustomerLoginById(Long id){
+    public CustomerLogin findCustomerLoginById(Long id) {
         return customerLoginRepository.findById(id)
                 .orElseThrow(
-                        ()-> new CustomerLoginNotFoundException("Customer could not find by id :" +id.toString())
+                        () -> new CustomerLoginNotFoundException("Customer could not find by id :" + id.toString())
                 );
     }
 
-    public CustomerLogin deleteCustomerLoginById(Long id) throws CustomerLoginNotFoundException  {
+    public CustomerLogin deleteCustomerLoginById(Long id) throws CustomerLoginNotFoundException {
         CustomerLogin customerLogin = findCustomerLoginById(id);
         customerLoginRepository.deleteById(id);
         return customerLogin;

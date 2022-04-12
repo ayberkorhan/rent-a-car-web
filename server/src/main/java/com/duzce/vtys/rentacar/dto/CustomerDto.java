@@ -1,10 +1,11 @@
 package com.duzce.vtys.rentacar.dto;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
-public class CustomerDto {
+public class CustomerDto implements Serializable {
 
 
     private Long customerId;

@@ -23,8 +23,6 @@ public class CustomerAdressService {
     private final CustomerAdressDtoConverter customerAdressDtoConverter;
 
 
-
-
     // Lazy anatation used for circular injection fix.
     public CustomerAdressService(CustomerAdressRepository customerAdressRepository, CustomerService customerService, CustomerAdressDtoConverter customerAdressDtoConverter) {
         this.customerAdressDtoConverter = customerAdressDtoConverter;

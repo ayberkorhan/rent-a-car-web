@@ -20,8 +20,6 @@ public class CustomerService {
     private final CustomerLoginService customerLoginService;
     private final CustomerDtoConverter customerDtoConverter;
 
-
-
     public CustomerService(CustomerRepository customerRepository, CustomerLoginService customerLoginService, CustomerDtoConverter customerDtoConverter) {
         this.customerRepository = customerRepository;
         this.customerLoginService = customerLoginService;
@@ -34,7 +32,7 @@ public class CustomerService {
 
     protected Customer findCustomerById(Long id) throws CustomerNotFoundException {
         return customerRepository.findById(id).orElseThrow(
-                ()-> new CustomerNotFoundException("Customer could not find by id: "+id.toString())
+                () -> new CustomerNotFoundException("Customer could not find by id: " + id.toString())
         );
     }
 

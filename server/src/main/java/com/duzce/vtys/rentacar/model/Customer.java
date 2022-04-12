@@ -10,6 +10,8 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer implements Serializable {
 
+    public Customer() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long customerId;

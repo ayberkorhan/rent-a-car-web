@@ -8,6 +8,9 @@ import java.util.Date;
 @Entity
 @Table(name = "customer_adress")
 public class CustomerAdress implements Serializable {
+
+    public CustomerAdress(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long adressId;

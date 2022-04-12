@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Table(name = "customer_login")
 public class CustomerLogin {
 
+    public CustomerLogin(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "login_id")
@@ -23,30 +25,36 @@ public class CustomerLogin {
 
 
     //Getter and Setter Methods
+
     public Long getLoginId() {
         return loginId;
+    }
+
+    public void setLoginId(Long loginId) {
+        this.loginId = loginId;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setLoginId(Long loginId) {this.loginId = loginId;}
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
