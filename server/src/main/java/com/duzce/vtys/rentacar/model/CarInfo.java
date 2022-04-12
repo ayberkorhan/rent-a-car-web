@@ -22,7 +22,7 @@ public class CarInfo implements Serializable {
 
     private String kilometer;
 
-    @OneToOne(mappedBy = "carInfo",fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "carInfo")
     private Car car;
 
 

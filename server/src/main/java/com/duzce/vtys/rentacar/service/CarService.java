@@ -8,6 +8,7 @@ import com.duzce.vtys.rentacar.model.CarInfo;
 import com.duzce.vtys.rentacar.model.CarLocation;
 import com.duzce.vtys.rentacar.repository.CarRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,11 @@ public class CarService {
         } else {
             throw new CarNotFoundException("Car could not find by id: " + id.toString());
         }
+    }
+
+    public List<Car> getAll() {
+        return carRepository.findAll();
+
     }
 
     ;

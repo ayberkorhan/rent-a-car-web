@@ -1,6 +1,9 @@
 package com.duzce.vtys.rentacar.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -23,12 +26,14 @@ public class Car implements Serializable {
 
     private String gearType;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "car_info_id",unique = true)
+    @JsonIgnore
     private CarInfo carInfo;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "car_location_id",unique = true)
+    @JsonIgnore
     private CarLocation carLocation;
 
     //Getter and Setter Methods
