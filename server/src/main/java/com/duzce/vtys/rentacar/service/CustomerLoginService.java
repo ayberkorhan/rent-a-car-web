@@ -6,8 +6,6 @@ import com.duzce.vtys.rentacar.dto.CustomerLoginDtoConverter;
 import com.duzce.vtys.rentacar.exception.CustomerLoginNotFoundException;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.repository.CustomerLoginRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +15,11 @@ public class CustomerLoginService {
 
     // @Autowired anatasyonu kullanılabilir. Spring Constructor Injection Tavsiye Ediyor.
     private final CustomerLoginRepository customerLoginRepository;
-
-    private final CustomerService customerService;
     private final CustomerLoginDtoConverter customerLoginDtoConverter;
 
-    @Autowired //Circular Dependencies in Spring
-    public CustomerLoginService(CustomerLoginRepository customerLoginRepository, @Lazy CustomerService customerService, CustomerLoginDtoConverter customerLoginDtoConverter) {
+
+    public CustomerLoginService(CustomerLoginRepository customerLoginRepository,CustomerLoginDtoConverter customerLoginDtoConverter) {
         this.customerLoginRepository = customerLoginRepository;
-        this.customerService = customerService;
         this.customerLoginDtoConverter = customerLoginDtoConverter;
     }
 
@@ -55,7 +50,7 @@ public class CustomerLoginService {
                 );
     }
 
-    public CustomerLogin deleteCustomerById(Long id) throws CustomerLoginNotFoundException  {
+    public CustomerLogin deleteCustomerLoginById(Long id) throws CustomerLoginNotFoundException  {
         CustomerLogin customerLogin = findCustomerLoginById(id);
         customerLoginRepository.deleteById(id);
         return customerLogin;

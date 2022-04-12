@@ -24,9 +24,9 @@ public class CustomerAdressService {
 
 
 
-    @Autowired
+
     // Lazy anatation used for circular injection fix.
-    public CustomerAdressService(CustomerAdressRepository customerAdressRepository, @Lazy CustomerService customerService, CustomerAdressDtoConverter customerAdressDtoConverter) {
+    public CustomerAdressService(CustomerAdressRepository customerAdressRepository, CustomerService customerService, CustomerAdressDtoConverter customerAdressDtoConverter) {
         this.customerAdressDtoConverter = customerAdressDtoConverter;
         this.customerAdressRepository = customerAdressRepository;
         this.customerService = customerService;

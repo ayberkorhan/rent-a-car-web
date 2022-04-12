@@ -27,7 +27,7 @@ public class Customer implements Serializable {
     private List<CustomerAdress> customerAdress;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "login_id", unique = true)
     private CustomerLogin customerLogin;
 

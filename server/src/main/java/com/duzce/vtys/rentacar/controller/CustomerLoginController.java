@@ -1,7 +1,6 @@
 package com.duzce.vtys.rentacar.controller;
 
 import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
-import com.duzce.vtys.rentacar.dto.CustomerLoginDtoConverter;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.service.CustomerLoginService;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class CustomerLoginController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomerLogin> deleteCustomerLogin(@PathVariable Long id) throws Exception {
-        return ResponseEntity.ok(customerLoginService.deleteCustomerById(id));
+        return ResponseEntity.ok(customerLoginService.deleteCustomerLoginById(id));
     }
 
     @GetMapping("/{id}")

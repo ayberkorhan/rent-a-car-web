@@ -18,7 +18,7 @@ public class CustomerLogin {
     @Column(name = "login_password")
     private String password;
 
-    @OneToOne(mappedBy = "customerLogin")
+    @OneToOne(mappedBy = "customerLogin",fetch = FetchType.LAZY)
     private Customer customer;
 
 
