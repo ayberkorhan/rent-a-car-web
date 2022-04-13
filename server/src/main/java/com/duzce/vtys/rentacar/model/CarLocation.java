@@ -18,7 +18,7 @@ public class CarLocation implements Serializable {
 
     private String longitude;
 
-    @OneToOne(mappedBy = "carLocation")
+    @OneToOne(mappedBy = "carLocation",fetch = FetchType.EAGER)
     private Car car;
 
     public Long getCarLocationId() {
