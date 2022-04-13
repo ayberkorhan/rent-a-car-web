@@ -30,6 +30,9 @@ public class CarController {
     public ResponseEntity deleteCar(@PathVariable("id") Long id) {
         return ResponseEntity.ok(carService.deleteCarById(id));
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<CarDto> getCarByID(@PathVariable("id") Long id){
+        return ResponseEntity.ok(carService.getCarById(id));
+    }
 
 }

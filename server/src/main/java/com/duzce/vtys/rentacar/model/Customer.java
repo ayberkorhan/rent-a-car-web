@@ -1,8 +1,9 @@
 package com.duzce.vtys.rentacar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 
@@ -25,9 +26,11 @@ public class Customer implements Serializable {
     @Column(name = "identity_number",unique = true)
     private Long identityNumber;
 
-    @OneToMany(mappedBy = "adressId")
+    @OneToMany(mappedBy = "adressId", fetch = FetchType.LAZY)
     private List<CustomerAdress> customerAdress;
 
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
+    private List<DriverLicence> driverLicence;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "login_id", unique = true)

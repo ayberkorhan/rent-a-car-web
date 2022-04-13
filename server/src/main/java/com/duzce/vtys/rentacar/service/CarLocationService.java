@@ -1,5 +1,6 @@
 package com.duzce.vtys.rentacar.service;
 
+import com.duzce.vtys.rentacar.exception.CarNotFoundException;
 import com.duzce.vtys.rentacar.model.CarLocation;
 import com.duzce.vtys.rentacar.repository.CarLocationRepository;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,11 @@ public class CarLocationService {
 
     public CarLocation saveCarLocation(CarLocation carLocation) {
         return carLocationRepository.save(carLocation);
+    }
+
+
+    public CarLocation findCarLocationById(Long id) {
+        return carLocationRepository.findById(id).orElseThrow(
+                () -> new CarNotFoundException("CarLocation could not find by id: " + id.toString()));
     }
 }

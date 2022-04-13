@@ -28,13 +28,14 @@ public class CarService {
         this.carDtoConverter = carDtoConverter;
     }
 
+
     public CarDto saveCar(Car car, CarInfo carInfo, CarLocation carLocation) {
-        carInfo=carInfoService.saveCarInfo(carInfo);
-        carLocation=carLocationService.saveCarLocation(carLocation);
+        carInfo = carInfoService.saveCarInfo(carInfo);
+        carLocation = carLocationService.saveCarLocation(carLocation);
         car.setCarInfo(carInfo);
         car.setCarLocation(carLocation);
         carRepository.save(car);
-        return carDtoConverter.convert(car,carInfo,carLocation);
+        return carDtoConverter.convert(car, carInfo, carLocation);
     }
 
     public boolean deleteCarById(Long id) {
@@ -47,6 +48,12 @@ public class CarService {
         }
     }
 
-    ;
+    public CarDto getCarById(Long id) {
+        Car car = carRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car could not found by id: " + id.toString()));
+        CarInfo carInfo = carInfoService.findCarInfoByCarId(car.getCarInfo().getCarInfoId());
+        CarLocation carLocation = carLocationService.findCarLocationById(car.getCarLocation().getCarLocationId());
+        return carDtoConverter.convert(car, carInfo, carLocation);
+
+    }
 
 }
