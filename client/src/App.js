@@ -1,15 +1,17 @@
 import React from 'react';
 import {
   ChakraProvider,
-  theme
+  theme,
 } from '@chakra-ui/react';
-import MainPage from '../Pages/MainPage';
+import './index.css';
+import Menu from './Components/Menu';
+import AdminPanel from './Pages/AdminPanel';
 
 
 function App() {
   return (
     <ChakraProvider theme={theme} resetCss={true}>
-      <MainPage/>
+      <AdminPanel/>
     </ChakraProvider>
   );
 }
