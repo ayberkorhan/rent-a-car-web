@@ -7,6 +7,9 @@ import com.duzce.vtys.rentacar.model.CarInfo;
 import com.duzce.vtys.rentacar.repository.CarInfoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class CarInfoService {
 
@@ -21,6 +24,14 @@ public class CarInfoService {
     }
 
     public CarInfo findCarInfoByCarId(Long id) {
-        return carInfoRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car could not find by id: " + id.toString()));
+        return carInfoRepository.findById(id).orElseThrow(() -> new CarNotFoundException("CarInfo could not find by id: " + id.toString()));
+    }
+
+    public CarInfo getCarInfoById(Long id ){
+        return carInfoRepository.findById(id).orElseThrow(() -> new CarNotFoundException("CarInfo could not find by id: " + id.toString()));
+    }
+
+    public List<CarInfo> getAllCarInfos() {
+        return carInfoRepository.findAll();
     }
 }

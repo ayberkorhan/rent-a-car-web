@@ -26,10 +26,10 @@ public class Customer implements Serializable {
     @Column(name = "identity_number",unique = true)
     private Long identityNumber;
 
-    @OneToMany(mappedBy = "adressId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "adressId", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<CustomerAdress> customerAdress;
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<DriverLicence> driverLicence;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

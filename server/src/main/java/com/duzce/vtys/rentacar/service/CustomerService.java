@@ -1,15 +1,14 @@
 package com.duzce.vtys.rentacar.service;
 
 
-import com.duzce.vtys.rentacar.dto.CustomerDto;
-import com.duzce.vtys.rentacar.dto.CustomerDtoConverter;
-import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
+import com.duzce.vtys.rentacar.dto.*;
 import com.duzce.vtys.rentacar.exception.CustomerNotFoundException;
 import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,10 +19,12 @@ public class CustomerService {
     private final CustomerLoginService customerLoginService;
     private final CustomerDtoConverter customerDtoConverter;
 
+
     public CustomerService(CustomerRepository customerRepository, CustomerLoginService customerLoginService, CustomerDtoConverter customerDtoConverter) {
         this.customerRepository = customerRepository;
         this.customerLoginService = customerLoginService;
         this.customerDtoConverter = customerDtoConverter;
+
     }
 
     public List<CustomerDto> getAllCustomer() {

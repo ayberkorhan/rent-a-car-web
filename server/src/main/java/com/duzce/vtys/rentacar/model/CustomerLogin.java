@@ -20,7 +20,7 @@ public class CustomerLogin {
     @Column(name = "login_password")
     private String password;
 
-    @OneToOne(mappedBy = "customerLogin",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "customerLogin",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Customer customer;
 
 

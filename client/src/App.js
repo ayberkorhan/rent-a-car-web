@@ -1,19 +1,28 @@
 import React from 'react';
 import {
-  ChakraProvider,
-  theme,
-} from '@chakra-ui/react';
-import './index.css';
-import Menu from './Components/Menu';
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Login from './Pages/Login';
 import AdminPanel from './Pages/AdminPanel';
 
 
-function App() {
-  return (
-    <ChakraProvider theme={theme} resetCss={true}>
-      <AdminPanel/>
-    </ChakraProvider>
-  );
-}
 
-export default App;
+const App = () => {
+
+
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={'/login'} element={<Login/>}/>
+        <Route path={'/adminpanel'} element={<AdminPanel />}/>
+      </Routes>
+    </BrowserRouter>
+
+
+  );
+};
+
+export default App

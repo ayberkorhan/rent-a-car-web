@@ -15,7 +15,7 @@ public class CustomerAdress implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long adressId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

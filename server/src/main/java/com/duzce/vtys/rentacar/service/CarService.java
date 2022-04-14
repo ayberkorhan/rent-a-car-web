@@ -10,6 +10,7 @@ import com.duzce.vtys.rentacar.repository.CarRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,36 @@ public class CarService {
         CarLocation carLocation = carLocationService.findCarLocationById(car.getCarLocation().getCarLocationId());
         return carDtoConverter.convert(car, carInfo, carLocation);
 
+    }
+
+    public List<CarDto> getAllCarsWithDetail() {
+        List<Car> cars = carRepository.findAll();
+        List<CarDto> carDtos = new ArrayList<>(cars.size());
+
+        cars.stream().forEach(car -> {
+            int i = 1;
+            CarInfo carInfo = carInfoService.getCarInfoById(car.getCarInfo().getCarInfoId());
+            CarLocation carLocation = carLocationService.findCarLocationById(car.getCarLocation().getCarLocationId());
+            CarDto carDto = new CarDto(
+                    car.getCarId(),
+                    carInfo.getCarInfoId(),
+                    carLocation.getCarLocationId(),
+                    car.getPlate(),
+                    car.getCarClass(),
+                    car.getFuelType(),
+                    car.getGearType(),
+                    carInfo.getBrand(),
+                    carInfo.getModel(),
+                    carInfo.getYear(),
+                    carInfo.getKilometer(),
+                    carLocation.getLatitude(),
+                    carLocation.getLongitude());
+            System.out.println(carDto);
+            carDtos.add(carDto);
+            i++;
+        });
+
+        return carDtos;
     }
 
 }
