@@ -15,7 +15,7 @@ public class CustomerAdress implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long adressId;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -26,6 +26,7 @@ public class CustomerAdress implements Serializable {
     private String buildingInfo;
     private String doorNumber;
     private String zipCode;
+    @Temporal(TemporalType.DATE)
     private Date createdDate;
 
     public Customer getCustomer() {

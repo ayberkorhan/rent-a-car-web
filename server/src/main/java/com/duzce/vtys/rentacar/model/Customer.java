@@ -26,7 +26,7 @@ public class Customer implements Serializable {
     @Column(name = "identity_number",unique = true)
     private Long identityNumber;
 
-    @OneToMany(mappedBy = "adressId", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<CustomerAdress> customerAdress;
 
     @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

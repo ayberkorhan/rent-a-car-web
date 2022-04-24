@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-function getAllCustomerLogin(){
-  return axios.get("http://localhost:8080/api/v1/customerlogin/")
+async function getAllCustomerLogin() {
+  return await axios.get('http://localhost:8080/api/v1/customerlogin/').catch(err => console.log(err));
 }
 
-function getCustomerLoginWithLoginId(id){
-  return axios.get("http://localhost:8080/api/v1/customerlogin/"+id.toString())
+async function getCustomerLoginWithLoginId(id) {
+  return await axios.get('http://localhost:8080/api/v1/customerlogin/' + id).then(res => res).catch(err => console.log(err));
 }
 
-export {getAllCustomerLogin,getCustomerLoginWithLoginId};
+async function postCustomerLogin(login) {
+  return await axios.post('http://localhost:8080/api/v1/customerlogin', login).then(res => res).catch(err => console.log(err));
+}
+
+export { getAllCustomerLogin, getCustomerLoginWithLoginId, postCustomerLogin };
