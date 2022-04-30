@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Car implements Serializable {
@@ -35,6 +36,10 @@ public class Car implements Serializable {
     @JoinColumn(name = "car_location_id",unique = true)
     @JsonIgnore
     private CarLocation carLocation;
+
+
+   @OneToMany(mappedBy = "car")
+    Set<Order> order;
 
     //Getter and Setter Methods
 

@@ -36,6 +36,8 @@ public class CarDto implements Serializable {
         this.longitude = longitude;
     }
 
+    public CarDto(Long carId, String plate, String carClass, String fuelType) {
+    }
 
 
     public Long getCarInfoId() {

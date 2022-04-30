@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,6 +28,9 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "adressId")
     private List<CustomerAdress> customerAdress;
+
+    @OneToMany(mappedBy = "customer")
+    Set<Order> order;
 
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
