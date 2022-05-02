@@ -11,5 +11,5 @@
 ## Authors
 
 ##### Muhammed Enes Şahin
-##### Ayberk Ulaş
+##### Ayberk Orhan
 ##### Mahmut Can Durak
