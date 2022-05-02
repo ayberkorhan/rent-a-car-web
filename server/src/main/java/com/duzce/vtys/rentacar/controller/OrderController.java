@@ -1,6 +1,5 @@
 package com.duzce.vtys.rentacar.controller;
 
-//SİK
 import com.duzce.vtys.rentacar.dto.CustomerDto;
 import com.duzce.vtys.rentacar.model.Car;
 import com.duzce.vtys.rentacar.model.Customer;
@@ -29,6 +28,9 @@ public class OrderController {
     }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> getByidOrder(@PathVariable Long id){ return ResponseEntity.ok(orderService.findOrderById(id));
+    }
     @GetMapping()
     public ResponseEntity<List<Order>> getAllOrder(){ return ResponseEntity.ok(orderService.getAllOrder());
     }

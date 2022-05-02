@@ -51,6 +51,12 @@ public class CustomerService {
         return customerDtoConverter.convert(customer);
     }
 
+
+    public Customer saveAll(Customer customer){
+        return customerRepository.save(customer);
+
+    }
+
     public CustomerDto deleteCustomerById(Long id) throws CustomerNotFoundException {
         CustomerDto customer = getCustomerById(id);
         customerRepository.deleteById(id);

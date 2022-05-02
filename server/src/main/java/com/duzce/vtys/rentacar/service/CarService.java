@@ -54,6 +54,10 @@ public class CarService {
 
     }
 
+    public Car saveAll(Car car){
+        return carRepository.save(car);
+    }
+
 
     protected Car findCarById(Long id) throws CustomerNotFoundException {
         return carRepository.findById(id).orElseThrow(
