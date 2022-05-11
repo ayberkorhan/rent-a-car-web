@@ -1,13 +1,12 @@
 package com.duzce.vtys.rentacar.service;
 
-import com.duzce.vtys.rentacar.dto.CarDto;
-import com.duzce.vtys.rentacar.dto.CarDtoConverter;
+import com.duzce.vtys.rentacar.dto.car.CarDto;
+import com.duzce.vtys.rentacar.dto.car.CarDtoConverter;
 import com.duzce.vtys.rentacar.exception.CarNotFoundException;
 import com.duzce.vtys.rentacar.model.Car;
 import com.duzce.vtys.rentacar.model.CarInfo;
 import com.duzce.vtys.rentacar.model.CarLocation;
 import com.duzce.vtys.rentacar.repository.CarRepository;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

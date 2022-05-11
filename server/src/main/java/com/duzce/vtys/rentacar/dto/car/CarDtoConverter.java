@@ -1,4 +1,4 @@
-package com.duzce.vtys.rentacar.dto;
+package com.duzce.vtys.rentacar.dto.car;
 
 import com.duzce.vtys.rentacar.model.Car;
 import com.duzce.vtys.rentacar.model.CarInfo;

@@ -1,14 +1,14 @@
 package com.duzce.vtys.rentacar.service;
 
 
-import com.duzce.vtys.rentacar.dto.*;
+import com.duzce.vtys.rentacar.dto.customer.CustomerDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerDtoConverter;
 import com.duzce.vtys.rentacar.exception.CustomerNotFoundException;
 import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

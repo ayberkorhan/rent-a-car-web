@@ -1,4 +1,4 @@
-package com.duzce.vtys.rentacar.dto;
+package com.duzce.vtys.rentacar.dto.car;
 
 import java.io.Serializable;
 
@@ -20,7 +20,10 @@ public class CarDto implements Serializable {
     public CarDto(){}
 
 
-    public CarDto(Long carId, Long carInfoId, Long carLocationId, String plate, String carClass, String fuelType, String gearType, String brand, String model, String year, String kilometer, String latitude, String longitude) {
+    public CarDto(Long carId, Long carInfoId, Long carLocationId, String plate,
+                  String carClass, String fuelType, String gearType, String brand,
+                  String model, String year, String kilometer, String latitude, String longitude) {
+
         this.carId = carId;
         this.carInfoId = carInfoId;
         this.carLocationId = carLocationId;

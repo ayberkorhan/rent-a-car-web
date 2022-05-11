@@ -1,22 +1,18 @@
 import {
-  Routes,
-  Route,
-  NavLink,
-  Navigate,
   useNavigate,
-  useLocation,
+  Navigate,
 } from 'react-router-dom';
 
 
-const ProtectedRoute = ({ children }) => {
-  const { token } = useAuth();
-  const location = useLocation();
+const ProtectedRoute = ({user, children }) => {
 
-  if (!token) {
-    return <Navigate to="/home" replace state={{ from: location }} />;
+  if (user) {
+    return children;
+  }
+  else{
+   return <Navigate to={"/login"}></Navigate>
   }
 
-  return children;
 };
 
 export default ProtectedRoute;

@@ -1,8 +1,7 @@
 package com.duzce.vtys.rentacar.controller;
 
-import com.duzce.vtys.rentacar.dto.CarDto;
-import com.duzce.vtys.rentacar.dto.CarWithInfoAndLocation;
-import com.duzce.vtys.rentacar.model.Car;
+import com.duzce.vtys.rentacar.dto.car.CarDto;
+import com.duzce.vtys.rentacar.dto.car.CarWithInfoAndLocation;
 import com.duzce.vtys.rentacar.service.CarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

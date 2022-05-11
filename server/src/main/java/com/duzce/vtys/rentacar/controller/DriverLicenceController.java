@@ -1,10 +1,8 @@
 package com.duzce.vtys.rentacar.controller;
 
-import com.duzce.vtys.rentacar.dto.DriverLicenceDto;
+import com.duzce.vtys.rentacar.dto.driver.DriverLicenceDto;
 import com.duzce.vtys.rentacar.model.DriverLicence;
 import com.duzce.vtys.rentacar.service.DriverLicenceService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

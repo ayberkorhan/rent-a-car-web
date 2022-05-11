@@ -1,6 +1,6 @@
 package com.duzce.vtys.rentacar.controller;
 
-import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerLoginDto;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.service.CustomerLoginService;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +38,9 @@ public class CustomerLoginController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomerLoginDto> getAllCustomerLogin(@PathVariable Long id) {
         return ResponseEntity.ok(customerLoginService.getCustomerLoginById(id));
+    }
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestBody CustomerLogin customerLogin) {
+        return ResponseEntity.ok(customerLoginService.login(customerLogin.getEmail(),customerLogin.getPassword()));
     }
 }

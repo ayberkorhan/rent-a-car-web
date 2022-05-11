@@ -1,17 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { deleteCustomerById, getAllCustomer, postCustomer } from '../../Services/CustomerService';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { confirmDialog, ConfirmDialog } from 'primereact/confirmdialog';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 import {
-  deleteCustomerAdresById,
   getCustomerAdressByCustomerId,
   postCustomerAdress,
 } from '../../Services/CustomerAdressService';
 import { getCustomerLoginWithLoginId, postCustomerLogin } from '../../Services/CustomerLoginService';
 import CustomerInfo from './CustomerInfo';
-import { Toast } from 'primereact/toast';
 
 export default function Customers() {
 
@@ -34,24 +32,21 @@ export default function Customers() {
     doorNumber: '',
     zipCode: '',
   });
-  const [isLoaded, setIsLoaded] = useState(false);
-  const toast = useRef();
 
 
   useEffect(() => {
     getAllCustomer()
       .then(res => setCustomers(res))
-      .then(setIsLoaded(true));
   }, []);
 
   useEffect(() => {
     getDetail();
-  }, [selectedCustomer]);
+  }, []);
 
   function getDetail() {
     if (selectedCustomer !== null) {
-      getCustomerAdressByCustomerId(selectedCustomer.customerId).then(res => setCustomerAdress(res.data));
-      getCustomerLoginWithLoginId(selectedCustomer.loginId).then(res => setCustomerLogin(res.data));
+      getCustomerAdressByCustomerId(selectedCustomer.customerId).then(res => setCustomerAdress(res));
+      getCustomerLoginWithLoginId(selectedCustomer.loginId).then(res => setCustomerLogin(res));
     }
   }
 
@@ -154,7 +149,7 @@ export default function Customers() {
                       <div className='px-4 py-5 bg-white sm:p-6'>
                         <div className='grid grid-cols-6 gap-6'>
                           <div className='col-span-6 sm:col-span-3'>
-                            <label htmlFor='first-name' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
                               Email
                             </label>
                             <input
@@ -169,7 +164,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6 sm:col-span-3'>
-                            <label htmlFor='last-name' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
                               Password
                             </label>
                             <input
@@ -185,7 +180,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6 sm:col-span-3'>
-                            <label htmlFor='first-name' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='firstName' className='block text-sm font-medium text-gray-700'>
                               First name
                             </label>
                             <input
@@ -200,7 +195,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6 sm:col-span-3'>
-                            <label htmlFor='last-name' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='lastName' className='block text-sm font-medium text-gray-700'>
                               Last name
                             </label>
                             <input
@@ -214,7 +209,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6 sm:col-span-4'>
-                            <label htmlFor='email-address' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='identityNumber' className='block text-sm font-medium text-gray-700'>
                               Identity Number
                             </label>
                             <input
@@ -258,7 +253,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6'>
-                            <label htmlFor='street-address' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='town' className='block text-sm font-medium text-gray-700'>
                               Town
                             </label>
                             <input
@@ -271,7 +266,7 @@ export default function Customers() {
                             />
                           </div>
                           <div className='col-span-6'>
-                            <label htmlFor='street-address' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='street' className='block text-sm font-medium text-gray-700'>
                               Street
                             </label>
                             <input
@@ -286,7 +281,7 @@ export default function Customers() {
 
 
                           <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                            <label htmlFor='region' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='buildingInfo' className='block text-sm font-medium text-gray-700'>
                               Building Info
                             </label>
                             <input
@@ -299,7 +294,7 @@ export default function Customers() {
                             />
                           </div>
                           <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                            <label htmlFor='region' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='doorNumber' className='block text-sm font-medium text-gray-700'>
                               Door Number
                             </label>
                             <input
@@ -313,7 +308,7 @@ export default function Customers() {
                           </div>
 
                           <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                            <label htmlFor='postal-code' className='block text-sm font-medium text-gray-700'>
+                            <label htmlFor='zipCode' className='block text-sm font-medium text-gray-700'>
                               ZIP / Postal code
                             </label>
                             <input

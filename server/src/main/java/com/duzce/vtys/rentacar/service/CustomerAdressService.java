@@ -1,14 +1,12 @@
 package com.duzce.vtys.rentacar.service;
 
 
-import com.duzce.vtys.rentacar.dto.CustomerAdressDto;
-import com.duzce.vtys.rentacar.dto.CustomerAdressDtoConverter;
+import com.duzce.vtys.rentacar.dto.customer.CustomerAdressDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerAdressDtoConverter;
 import com.duzce.vtys.rentacar.exception.CustomerAdressNotFoundException;
 import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.model.CustomerAdress;
 import com.duzce.vtys.rentacar.repository.CustomerAdressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

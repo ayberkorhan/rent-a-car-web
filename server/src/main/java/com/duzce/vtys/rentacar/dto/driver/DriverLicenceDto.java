@@ -1,4 +1,4 @@
-package com.duzce.vtys.rentacar.dto;
+package com.duzce.vtys.rentacar.dto.driver;
 
 import com.duzce.vtys.rentacar.model.DriverLicence;
 import org.springframework.stereotype.Component;

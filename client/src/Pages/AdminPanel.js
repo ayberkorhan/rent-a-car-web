@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Link } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import MainMenu from '../Components/MainMenu';
 import Customers from '../Components/Customer/Customers';
@@ -7,12 +7,14 @@ import Employee from '../Components/Employee/Employee';
 import Order from '../Components/Orders/Order';
 
 
-function AdminPanel () {
+function AdminPanel ({user}) {
+
 
 
   return(
+
     <div className={"flex flex-col min-h-full min-w-full justify-center content-center"}>
-      <MainMenu/>
+      <MainMenu user={user}/>
       <div className={"mt-3 text-xl font-bold"}>
         <h3 className={"text-2xl font-bold"}>Yönetim Paneli</h3>
         <Tabs isFitted variant='enclosed'>

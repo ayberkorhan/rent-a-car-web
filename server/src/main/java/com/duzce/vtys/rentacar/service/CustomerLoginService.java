@@ -1,8 +1,8 @@
 package com.duzce.vtys.rentacar.service;
 
 
-import com.duzce.vtys.rentacar.dto.CustomerLoginDto;
-import com.duzce.vtys.rentacar.dto.CustomerLoginDtoConverter;
+import com.duzce.vtys.rentacar.dto.customer.CustomerLoginDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerLoginDtoConverter;
 import com.duzce.vtys.rentacar.exception.CustomerLoginNotFoundException;
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import com.duzce.vtys.rentacar.repository.CustomerLoginRepository;
@@ -55,6 +55,12 @@ public class CustomerLoginService {
         customerLoginRepository.deleteById(id);
         return customerLogin;
 
+    }
+
+    public boolean login (String email,String password) {
+        CustomerLogin login=null;
+        login= customerLoginRepository.getCustomerLoginByCustomerEqualsAndEmailAndPassword(email,password);
+        return login != null ? true : false;
     }
 
 }

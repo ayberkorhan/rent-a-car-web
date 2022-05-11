@@ -1,14 +1,13 @@
 package com.duzce.vtys.rentacar.service;
 
-import com.duzce.vtys.rentacar.dto.DriverLicenceDto;
-import com.duzce.vtys.rentacar.dto.DriverLicenceDtoConverter;
+import com.duzce.vtys.rentacar.dto.driver.DriverLicenceDto;
+import com.duzce.vtys.rentacar.dto.driver.DriverLicenceDtoConverter;
 import com.duzce.vtys.rentacar.exception.DriverLicenceNotFoundException;
 import com.duzce.vtys.rentacar.model.Customer;
 import com.duzce.vtys.rentacar.model.DriverLicence;
 import com.duzce.vtys.rentacar.repository.DriveLicenceRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Driver;
 import java.util.List;
 
 @Service
@@ -38,7 +37,7 @@ public class DriverLicenceService {
     public DriverLicence findDriverLicenceById(Long id) {
         return driveLicenceRepository.findById(id)
                 .orElseThrow
-                        (() -> new DriverLicenceNotFoundException("Could not found driver license by id:+id.toString() "));
+                        (() -> new DriverLicenceNotFoundException("Could not found driver license by id:" +id.toString()));
     }
 
     public DriverLicenceDto addNewDriverLicence(DriverLicence driverLicence) {

@@ -12,4 +12,8 @@ async function postCustomerLogin(login) {
   return await axios.post('http://localhost:8080/api/v1/customerlogin', login).then(res => res).catch(err => console.log(err));
 }
 
-export { getAllCustomerLogin, getCustomerLoginWithLoginId, postCustomerLogin };
+async function login(login) {
+  return await axios.post('http://localhost:8080/api/v1/customerlogin/login', login).then(res => res).catch(err => console.log(err));
+}
+
+export { getAllCustomerLogin, getCustomerLoginWithLoginId, postCustomerLogin, login };

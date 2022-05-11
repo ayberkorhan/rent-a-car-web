@@ -1,14 +1,12 @@
 package com.duzce.vtys.rentacar.controller;
 
-import com.duzce.vtys.rentacar.dto.CustomerDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerDto;
 import com.duzce.vtys.rentacar.model.Customer;
-import com.duzce.vtys.rentacar.model.CustomerAdress;
 import com.duzce.vtys.rentacar.service.CustomerAdressService;
 import com.duzce.vtys.rentacar.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -18,11 +16,11 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
-    private final CustomerAdressService customerAdressService;
 
-    public CustomerController(CustomerService customerService, CustomerAdressService customerAdressService) {
+
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
-        this.customerAdressService = customerAdressService;
+
     }
 
     @GetMapping()

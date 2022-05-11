@@ -1,4 +1,4 @@
-package com.duzce.vtys.rentacar.dto;
+package com.duzce.vtys.rentacar.dto.customer;
 
 import com.duzce.vtys.rentacar.model.CustomerLogin;
 import org.springframework.stereotype.Component;

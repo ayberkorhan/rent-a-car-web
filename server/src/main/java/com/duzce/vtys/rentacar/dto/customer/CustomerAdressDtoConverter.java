@@ -1,4 +1,4 @@
-package com.duzce.vtys.rentacar.dto;
+package com.duzce.vtys.rentacar.dto.customer;
 
 
 import com.duzce.vtys.rentacar.model.CustomerAdress;

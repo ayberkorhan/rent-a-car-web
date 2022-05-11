@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
@@ -13,7 +13,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function MainMenu () {
+function MainMenu (user) {
+
+  const [userInfo,setUserInfo] = useState({});
+
+
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -109,10 +113,10 @@ function MainMenu () {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/login"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Sign out
+                            {user.user.isLoggedIn ? <p>Çıkış Yap</p> : <p>Giriş Yap</p>}
                           </a>
                         )}
                       </Menu.Item>

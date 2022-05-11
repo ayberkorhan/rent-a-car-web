@@ -14,4 +14,6 @@ async function postCustomer(customer) {
   return await axios.post('http://localhost:8080/api/v1/customer', customer).then(res => res).catch(err => console.log(err));
 }
 
+
+
 export { getAllCustomer, deleteCustomerById, postCustomer };

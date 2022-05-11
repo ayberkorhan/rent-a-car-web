@@ -1,6 +1,6 @@
 package com.duzce.vtys.rentacar.controller;
 
-import com.duzce.vtys.rentacar.dto.CustomerAdressDto;
+import com.duzce.vtys.rentacar.dto.customer.CustomerAdressDto;
 import com.duzce.vtys.rentacar.model.CustomerAdress;
 import com.duzce.vtys.rentacar.service.CustomerAdressService;
 import org.springframework.http.ResponseEntity;
