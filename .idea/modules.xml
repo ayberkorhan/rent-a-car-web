@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/VTYS.iml" filepath="$PROJECT_DIR$/.idea/VTYS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/rentacar.iml" filepath="$PROJECT_DIR$/server/rentacar.iml" />
     </modules>
   </component>
 </project>

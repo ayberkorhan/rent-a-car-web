@@ -13,7 +13,7 @@ import java.util.Set;
 public class EmployeeRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
     private String roleName;

@@ -18,7 +18,7 @@ public class Employee implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
 
     @Column(name = "login_id")

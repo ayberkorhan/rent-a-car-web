@@ -14,7 +14,7 @@ public class EmployeeLogin {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loginId;
 
     @Column(unique = true)
