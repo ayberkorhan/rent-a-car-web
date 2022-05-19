@@ -18,6 +18,11 @@ public class EmployeeLoginService {
     }
 
 
+    public boolean login (EmployeeLogin employeeLogin){
+        EmployeeLogin login = employeeLoginRepository.
+                getEmployeeLoginByEmailAndPassword(employeeLogin.getEmail(),employeeLogin.getPassword());
+        return login!=null;
+    }
     public EmployeeLogin findEmployeeLoginById(Long id) {
         return employeeLoginRepository.findById(id)
                 .orElseThrow(() -> new EmployeeLoginNotFoundException("Employee is not found by id:" + id.toString()));

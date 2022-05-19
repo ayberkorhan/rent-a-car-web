@@ -8,6 +8,7 @@ import com.duzce.vtys.rentacar.model.EmployeeLogin;
 import com.duzce.vtys.rentacar.service.EmployeeLoginService;
 import com.duzce.vtys.rentacar.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,5 +62,10 @@ public class EmployeeController {
     public ResponseEntity<EmployeeDto> postEmployee(@RequestBody Employee employee){
         EmployeeDto employeeDto = converter.convert(employeeService.postEmployee(employee));
         return ResponseEntity.ok(employeeDto);
+    }
+
+    @PostMapping("/login")
+    public boolean loginEmployee(@RequestBody EmployeeLogin employeeLogin){
+        return employeeLoginService.login(employeeLogin);
     }
 }

@@ -5,7 +5,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton, useDisclosure, Input,
+  DrawerCloseButton, useDisclosure,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
@@ -18,7 +18,7 @@ function CustomerInfo({customer,customerLogin,customerAdress}) {
 
 
   const loginInfo = <div>
-    {customer.firstName !== undefined && customer.firstName !== null ?
+    {customer !== null ?
       <section>
         <hr/>
         <br/>
@@ -29,7 +29,8 @@ function CustomerInfo({customer,customerLogin,customerAdress}) {
         <br/>
         <hr/>
         <br/>
-        {customerAdress.map((adress,i)=> {
+
+        {customerAdress.length>1 ? customerAdress.map((adress,i)=> {
           return (
             <div key={i}>
               <h2 className={"text-xl font-bold"}>Adres Bilgileri</h2>
@@ -42,7 +43,16 @@ function CustomerInfo({customer,customerLogin,customerAdress}) {
               <p className={"font-bold text-l"}>Posta Kodu: {adress.zipCode}</p>
             </div>
           )
-        })}
+        }) : <div>
+          <h2 className={"text-xl font-bold"}>Adres Bilgileri</h2>
+          <p className={"font-bold text-l"}>Ülke: {customerAdress.country}</p>
+          <p className={"font-bold text-l"}>İl: {customerAdress.city}</p>
+          <p className={"font-bold text-l"}>İlçe: {customerAdress.town}</p>
+          <p className={"font-bold text-l"}>Cadde: {customerAdress.street}</p>
+          <p className={"font-bold text-l"}>Bina Adı: {customerAdress.buildingInfo}</p>
+          <p className={"font-bold text-l"}>Kapı Numarası: {customerAdress.doorNumber}</p>
+          <p className={"font-bold text-l"}>Posta Kodu: {customerAdress.zipCode}</p>
+        </div>}
       </section>
       :
       <p>Not Found</p>

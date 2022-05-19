@@ -15,7 +15,7 @@ export default function Customers() {
 
   const [customers, setCustomers] = useState([{}]);
   const [deleteButtonvisible, setDeleteButtonvisible] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState({});
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [customerAdress, setCustomerAdress] = useState([{}]);
   const [customerLogin, setCustomerLogin] = useState({});
   const [customerPost, setCustomerPost] = useState({
@@ -40,15 +40,8 @@ export default function Customers() {
   }, []);
 
   useEffect(() => {
-    getDetail();
-  }, []);
 
-  function getDetail() {
-    if (selectedCustomer !== null) {
-      getCustomerAdressByCustomerId(selectedCustomer.customerId).then(res => setCustomerAdress(res));
-      getCustomerLoginWithLoginId(selectedCustomer.loginId).then(res => setCustomerLogin(res));
-    }
-  }
+  }, []);
 
 
   const deleteCustomerAdres = () => {
@@ -85,7 +78,6 @@ export default function Customers() {
     };
 
 
-    if(customerPost.email.length>5 && customerPost.password>6 && customerPost.identityNumber.length === 11) {
       postCustomerLogin(login)
         .then(res => {
           customer.customerLogin.loginId = res.data.loginId;
@@ -96,15 +88,7 @@ export default function Customers() {
                 response.status === 200 ? alert('Kayıt Başarılı') : alert('Hata!');
               });
             });
-        })
-    }
-    else {
-      alert("Lütfen Alanları Doldurunuz")
-    }
-    // This chain is post customerLogin , customer , customerAdres
-
-
-
+        }).finally(()=> getAllCustomer().then(res => setCustomers(res)))
     e.preventDefault();
   };
 
@@ -132,7 +116,6 @@ export default function Customers() {
 
     <Button onClick={() => setDeleteButtonvisible(!deleteButtonvisible)} icon='pi pi-check' label='Sil'
             className={'p-button-sm p-button-danger m-2'} />
-    <CustomerInfo customer={selectedCustomer} customerAdress={customerAdress} customerLogin={customerLogin} />
   </div>
 
 
@@ -339,10 +322,10 @@ export default function Customers() {
               <DataTable
                 header={buttons}
                 value={customers} responsiveLayout={'scroll'} selection={selectedCustomer}
-                onSelectionChange={(e) => {setSelectedCustomer(e.value);getDetail() }} selectionMode='single'>
-                <Column field={'firstName'} header={'Adı'} />
-                <Column field={'lastName'} header={'Soyadı'} />
-                <Column field={'identityNumber'} header={'Kimlik Numarası'} />
+                onSelectionChange={(e) => {setSelectedCustomer(e.value);} } selectionMode='single'>
+                <Column field={'firstName'} header={'Adı'} sortable/>
+                <Column field={'lastName'} header={'Soyadı'} sortable/>
+                <Column field={'identityNumber'} header={'Kimlik Numarası'} sortable />
               </DataTable>
             </div>
           </div>

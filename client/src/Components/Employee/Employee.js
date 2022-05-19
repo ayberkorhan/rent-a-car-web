@@ -1,32 +1,75 @@
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useEffect, useState } from 'react';
-import { getAllEmployee } from '../../Services/EmployeService';
+import { deleteEmployeeById, getAllEmployee, postEmployee } from '../../Services/EmployeService';
+import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Button } from 'primereact/button';
+import { getAllCar } from '../../Services/CarService';
 
 function Employee() {
 
-  const [employee,setEmployee] = useState({});
-  const [employeeLogin,setEmployeeLogin]=useState({});
-  const [employees,setEmployees] = useState([{}]);
-  const [isLoading,setIsLoading] = useState(false);
+  const [visible,setVisible]=useState(false);
+  const [isLoading,setIsLoading] = useState(true);
+  const [employee,setEmployee] = useState({
+    "firstName":"",
+    "lastName":"",
+    "identityNumber":"",
+    "adress":"",
+    "role":"Developer",
 
-  useEffect(() => {
-    getAllEmployee().then(res => setEmployees(res))
-      .finally(()=> employees ? setIsLoading(true) : setIsLoading(false));
-  }, []);
+  });
+  const [employeeLogin,setEmployeeLogin] = useState({
+    "email":"",
+    "password":"",
+  });
+  const [selectedEmployee,setSelectedEmployee]=useState({});
+  const [employeeList,setEmployeeList] = useState([{}]);
 
+
+  useEffect(()=> {
+    getAllEmployee().then(res => setEmployeeList(res));
+  },[])
 
   const employeeInputOnChange = (e) => {
     setEmployee({
-      ...setEmployee, [e.target.name]: e.target.value,
+      ...employee, [e.target.name]: e.target.value,
     });
   };
 
   const employeeLoginInputOnChange = (e) => {
     setEmployeeLogin({
-      ...setEmployee, [e.target.name]: e.target.value,
+      ...employeeLogin, [e.target.name]: e.target.value,
     });
   };
+
+  const onFormSubmit = (e) => {
+    let emp =  {
+      "firstName":employee.firstName,
+      "lastName":employee.lastName,
+      "identityNumber":employee.identityNumber,
+      "adress":employee.adress,
+      "role":employee.role,
+      employeeLogin
+
+    }
+    e.preventDefault();
+    postEmployee(emp).then(res => res.status === 200 ? getAllEmployee().then(res => setEmployeeList(res)) : alert("Bir Hata Meydana Geldi"))
+  }
+
+  const messageTemplate = <div>Bu Kaydı Silmek İstediğinize Emin Misiniz ?</div>
+
+  const buttons = () => <div>
+
+    <ConfirmDialog visible={visible} onHide={() => setVisible(false)}
+                   message={messageTemplate}
+                   header='Seçili Araba Bilgileri Silinecek Onaylıyor Musunuz?' icon='pi pi-exclamation-triangle'
+                   accept={()=>deleteEmployeeById(selectedEmployee.employeeId).then(()=> getAllEmployee().then(res => setEmployeeList(res)))}
+                   />
+
+    <Button onClick={() => setVisible(!visible)} icon='pi pi-check' label='Sil'
+            className={'p-button-sm p-button-danger m-2'} />
+
+  </div>
 
   return (
     <>
@@ -147,6 +190,7 @@ function Employee() {
                       </div>
                       <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
                         <button
+                          onClick={onFormSubmit}
                           className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 '
                         >
                           Save
@@ -158,17 +202,18 @@ function Employee() {
               </div>
             </div>
             <div className='mt-5 md:mt-0 md:col-span-2'>
-              {isLoading ? <DataTable
-                responsiveLayout={'scroll'}
-                selectionMode='single'
-                value={employees}
-              >
-                <Column field={'firstName'} header={'Adı'} />
-                <Column field={'lastName'} header={'Soyadı'} />
-                <Column field={'identityNumber'} header={'Kimlik Numarası'} />
-                <Column field={'adress'} header={'Adres'} />
-                <Column field={'role'} header={'Role'} />
-                <Column field={'email'} header={'Email'} />
+              {isLoading ?
+              <DataTable
+                header={buttons}
+                value={employeeList} responsiveLayout={'scroll'} selection={selectedEmployee}
+                onSelectionChange={(e) => {setSelectedEmployee(e.value);}} selectionMode='single'
+                paginator rows={10} rowsPerPageOptions={[5, 10, 25]}>
+                <Column field={'firstName'} header={'Adı'} sortable/>
+                <Column field={'lastName'} header={'Soyadı'} sortable/>
+                <Column field={'identityNumber'} header={'Kimlik Numarası'} sortable/>
+                <Column field={'adress'} header={'Adres'} sortable/>
+                <Column field={'role'} header={'Role'} sortable/>
+                <Column field={'email'} header={'Email'} sortable/>
               </DataTable> : <p>Yükleniyor..</p> }
 
             </div>

@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { deleteCarById, getAllCar, postCar } from '../../Services/CarService';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Button } from 'primereact/button';
 import { ConfirmDialog } from 'primereact/confirmdialog';
-import CustomerInfo from '../Customer/CustomerInfo';
+import FilterMatchMode from 'primereact/api';
+import FilterOperator from 'primereact/api';
+import { InputText } from 'primereact/inputtext';
 
-function Cars () {
 
+function Cars (props) {
 
   const [carList, setCarList] = useState([{}]);
   const [selectedCar,setSelectedCar] = useState({});
@@ -33,13 +35,8 @@ function Cars () {
 
   useEffect(() => {
     getAllCar().then(res => setCarList(res.data));
-    console.log(carList)
-
   }, []);
 
-  useEffect(() => {
-    console.log(selectedCar)
-  }, [selectedCar]);
 
   const onCarHandleChange = (e) => {
     setCar({...car , [e.target.name]:e.target.value});
@@ -52,6 +49,50 @@ function Cars () {
   const onCarLocationHandleChange = (e) => {
     setCarLocation({...carLocation,[e.target.name]:e.target.value});
   }
+
+  const cols = [
+    { field: 'plate', header: 'Plaka' },
+    { field: 'fuelType', header: 'Motor Türü' },
+    { field: 'gearType', header: 'Vites' },
+    { field: 'brand', header: 'Marka' }
+  ];
+
+  const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+
+  const exportPdf = () => {
+    import('jspdf').then(jsPDF => {
+      import('jspdf-autotable').then(() => {
+        const doc = new jsPDF.default(0, 0);
+        doc.autoTable(exportColumns, carList);
+        doc.save('products.pdf');
+      })
+    })
+  }
+
+
+  const exportExcel = () => {
+    import('xlsx').then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(carList);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      saveAsExcelFile(excelBuffer, 'products');
+    });
+  }
+
+  const saveAsExcelFile = (buffer, fileName) => {
+    import('file-saver').then(module => {
+      if (module && module.default) {
+        let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        let EXCEL_EXTENSION = '.xlsx';
+        const data = new Blob([buffer], {
+          type: EXCEL_TYPE
+        });
+
+        module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+      }
+    });
+  }
+
 
 
   const onFormSubmit = (e) => {
@@ -67,20 +108,32 @@ function Cars () {
   }
 
   function deleteCar(){
-    deleteCarById(selectedCar.carId).then(res => res ? getAllCar().then(res => setCarList(res.data)) : alert("Hata Oluştu")).catch(err => alert(err));
+    deleteCarById(selectedCar.carId)
+      .then(res => res ? getAllCar()
+        .then(res => setCarList(res.data))
+        : alert("Hata Oluştu")).catch(err => alert(err));
   }
 
   const messageTemplate = <div>Bu Kaydı Silmek İstediğinize Emin Misiniz ?</div>
 
   const buttons = () => <div>
+    <div className="flex-col align-items-center export-buttons">
+      <p>Export Data</p>
+      <div>
+        <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
+        <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+        <Button onClick={() => setVisible(!visible)} icon='pi pi-check' label='Sil'
+                className="p-button-danger mr-2" />
+      </div>
+
+    </div>
 
     <ConfirmDialog visible={visible} onHide={() => setVisible(false)}
                    message={messageTemplate}
                    header='Seçili Araba Bilgileri Silinecek Onaylıyor Musunuz?' icon='pi pi-exclamation-triangle'
                    accept={()=>deleteCar(selectedCar.id)} reject={() => console.log('heelo')} />
 
-    <Button onClick={() => setVisible(!visible)} icon='pi pi-check' label='Sil'
-            className={'p-button-sm p-button-danger m-2'} />
+
 
   </div>
 
@@ -290,16 +343,21 @@ function Cars () {
               <DataTable
                 header={buttons}
                 value={carList} responsiveLayout={'scroll'} selection={selectedCar}
-                onSelectionChange={(e) => {setSelectedCar(e.value)}} selectionMode='single'>
-                <Column field={'plate'} header={'Plaka'} />
-                <Column field={'fuelType'} header={'Motor Türü'} />
-                <Column field={'gearType'} header={'Klasman'} />
-                <Column field={'brand'} header={'Marka'} />
-                <Column field={'model'} header={'Model'} />
-                <Column field={'year'} header={'Yıl'} />
-                <Column field={'kilometer'} header={'Kilometre'} />
-                <Column field={'latitude'} header={'Enlem'} />
-                <Column field={'longitude'} header={'Boylam'} />
+                onSelectionChange={(e) => {setSelectedCar(e.value)}} selectionMode='single'
+                paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
+                filterDisplay="menu"
+                globalFilterFields={['plate', 'fuelType', 'gearType', 'year', 'model']}
+                emptyMessage="No cars found."
+              >
+                <Column field={'plate'} header={'Plaka'} sortable filter filterPlaceholder="Plaka" style={{ minWidth: '12rem' }} />
+                <Column field={'fuelType'} header={'Motor Türü'} sortable filter filterPlaceholder="Motor Türü" style={{ minWidth: '12rem' }} />
+                <Column field={'gearType'} header={'Klasman'} sortable filter filterPlaceholder="Klasman" style={{ minWidth: '12rem' }} />
+                <Column field={'brand'} header={'Marka'} sortable filter filterPlaceholder="Marka" style={{ minWidth: '12rem' }} />
+                <Column field={'model'} header={'Model'} sortable filter filterPlaceholder="Model" style={{ minWidth: '12rem' }} />
+                <Column field={'year'} header={'Yıl'} sortable filter filterPlaceholder="Yıl" style={{ minWidth: '12rem' }} />
+                <Column field={'kilometer'} header={'Kilometre'} sortable filter filterPlaceholder="Kilometre" style={{ minWidth: '12rem' }} />
+                <Column field={'latitude'} header={'Enlem'} sortable filter filterPlaceholder="Enlem" style={{ minWidth: '12rem' }} />
+                <Column field={'longitude'} header={'Boylam'} sortable filter filterPlaceholder="Boylam" style={{ minWidth: '12rem' }} />
               </DataTable>
             </div>
           </div>

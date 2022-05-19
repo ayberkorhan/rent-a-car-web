@@ -1,30 +1,52 @@
 import React, { useState } from 'react';
 import { login } from '../Services/CustomerLoginService';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { employeeLogin } from '../Services/EmployeService';
+import { Checkbox } from '@chakra-ui/react';
 
 
 function Login(props) {
 
-  const { user, setUser } = props;
+  const {user,setUser} = props;
   const [loginInfo, setLoginInfo] = useState({});
+  const [userLogin,setUserLogin] = useState(false);
+  const [adminLogin,setAdminLogin] = useState(false);
   const navigate = useNavigate();
 
   const onChange = (e) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
-    login(loginInfo).then(res => setUser(res.data)).finally(() => {
-      if (!user) {
-        alert('Email veya Şifre Hatalı');
-      } else {
-        setUser({ email: loginInfo.email, isLoggedIn: true });
-        navigate('/adminpanel');
 
-      }
-      console.log(user);
-    });
-    e.preventDefault();
+  const loginUser = () => {
+    login(loginInfo).then(res => setUserLogin(res.data))
+    employeeLogin(loginInfo).then(res => setAdminLogin(res.data)).finally(()=> yetki());
+  }
+
+  const yetki = () => {
+    if(!userLogin && !adminLogin ) {
+      alert("Kullanıcı Adı Veya Şifre Yanlış")
+    }
+    else if(userLogin && adminLogin) {
+      alert("Kullanıcı Adı Veya Şifre Yanlış")
+    }
+    else if (userLogin){
+      setUser("user")
+      alert("Giriş Başarılı")
+      navigate("/order")
+    }
+    else if(adminLogin){
+      setUser("admin")
+      alert("Giriş Başarılı")
+      navigate("/adminpanel")
+    }
+  }
+
+
+
+  const onSubmit = (e) => {
+    loginUser();
+   e.preventDefault()
   };
 
 
@@ -78,6 +100,11 @@ function Login(props) {
                   onChange={onChange}
                 />
               </div>
+
+
+            </div>
+
+            <div>
             </div>
 
             <div>
